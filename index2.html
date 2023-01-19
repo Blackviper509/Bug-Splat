@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bug Game</title>
+</head>
+<body onload = "initialize();">
+    <h1>I hate bugs, can you get rid of em for me :) </h1>
+    <img src="alivebugs.png" id = bug1 onclick="save(1);">
+    <img src="alivebugs.png" id = bug2 onclick="save(2);">
+    <img src="alivebugs.png" id = bug3 onclick="save(3);">
+    <img src="alivebugs.png" id = bug4 onclick="save(4);">
+    <img src="alivebugs.png" id = bug5 onclick="save(5);">
+    <img src="alivebugs.png" id = bug6 onclick="save(6);">
+    <img src="alivebugs.png" id = bug7 onclick="save(7);">
+    <img src="alivebugs.png" id = bug8 onclick="save(8);">
+    <img src="alivebugs.png" id = bug9 onclick="save(9);">
+    <img src="alivebugs.png" id = bug10 onclick="save(10);">
+    <img src="alivebugs.png" id = bug11 onclick="save(11);">
+    <img src="alivebugs.png" id = bug12 onclick="save(12);">
+    <img src="alivebugs.png" id = bug13 onclick="save(13);">
+    <img src="alivebugs.png" id = bug14 onclick="save(14);">
+    <img src="alivebugs.png" id = bug15 onclick="save(15);">
+    <img src="alivebugs.png" id = bug16 onclick="save(16);">
+    <div>
+        <p id= "comment" style="font-size: 40px;">We're so scared rn omg...</p>
+    </div>
+</body>
+
+<script>
+    let bugs = Array.from({length: 16}, (_, i) => true);
+    var defiantComments = ["You think u scaring us?", "Ur not like that", "lol", "You know you ain't jack", "You wonder why she don't want u", "So weak smh", "Oh how cruel our revenge will be...", "Ur worse than the Giants lol"];
+    var mercyComments = ["Okay that's enough", "Chill bruh", "Gang we were playing", "I wanna see my mom bro", "We have families too", "Show mercy please!!", "Tell my wife and son I love them", "I'm not dying a virgin bruh plz"];
+    
+    function initialize() {
+        for (let i = 1; i <= 16; i++) {
+            document.getElementById(`bug${i}`).addEventListener('click', () => save(i));
+        }
+    }
+    
+    function save(x) {
+        if (bugs[x - 1]) {
+           if(countBugs() >= 9){
+            comment = defiantComments[Math.floor(Math.random()*defiantComments.length)]; 
+            delete defiantComments[comment];
+            document.getElementById("comment").innerHTML = comment;
+           }
+           if(countBugs() <= 9){
+            comment = mercyComments[Math.floor(Math.random()*mercyComments.length)];
+            delete mercyComments.indexOf(comment);
+            document.getElementById("comment").innerHTML = comment;
+           }
+           if(countBugs() <= 1)
+           {
+            comment = "You’ve splatted us all.";
+            document.getElementById("comment").innerHTML = comment;
+           }
+            bugs[x - 1] = false;
+            document.getElementById(`bug${x}`).src = "squishedbug.png";
+        }
+    }
+    
+    function countBugs()
+    {
+        let count = 0;
+        for(let i=0;i<bugs.length;i++){
+            if(bugs[i])
+                count++;
+        }
+        return count;
+    }
+    </script>
+<style>
+    body {
+        background-color: rgb(47, 185, 104);
+        color: black;
+        border-radius: 10%;
+        border-color: blue;
+    }
+    </style>
+</html>
